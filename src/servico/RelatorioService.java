@@ -5,10 +5,10 @@ import dominio.Pedido;
 public class RelatorioService {
 
     public void gerar(Pedido p) {
-        System.out.println("Cliente: " + p.clienteNome);
-        System.out.println("Total com frete: " + (p.total + p.frete));
+        System.out.println("Cliente: " + p.getClienteNome());
+        System.out.println("Total com frete: " + (p.getTotal() + p.getFrete()));
 
-        if (p.total > 1000) {
+        if (p.getTotal() > 1000) {
             System.out.println("Cliente VIP");
         }
     }

@@ -8,9 +8,9 @@ public class Sistema {
 
         Pedido p = new Pedido();
 
-        p.clienteNome = "Maria";
-        p.clienteEmail = "maria@email.com";
-        p.clienteEndereco = "SC";
+        p.setClienteNome("Maria");
+        p.setClienteEmail("maria@email.com");
+        p.setClienteEndereco("SC");
 
         p.adicionarItem("Notebook", 3000, 1);
         p.adicionarItem("Mouse", 100, 2);
@@ -22,7 +22,7 @@ public class Sistema {
         RelatorioService r = new RelatorioService();
         r.gerar(p);
 
-        System.out.println("Frete: " + p.frete);
-        System.out.println("Status: " + p.status);
+        System.out.println("Frete: " + p.getFrete());
+        System.out.println("Status: " + p.getStatus());
     }
 }

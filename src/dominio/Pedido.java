@@ -7,19 +7,69 @@ import java.util.*;
 
 public class Pedido {
 
-    public List<String> produtos = new ArrayList<>();
-    public List<Double> precos = new ArrayList<>();
-    public List<Integer> quantidades = new ArrayList<>();
+    private List<String> produtos = new ArrayList<>();
+    private List<Double> precos = new ArrayList<>();
+    private List<Integer> quantidades = new ArrayList<>();
 
-    public String clienteNome;
-    public String clienteEmail;
-    public String clienteEndereco;
+    private String clienteNome;
+    private String clienteEmail;
+    private String clienteEndereco;
 
-    public double total;
-    public double frete;
-    public String status;
+    private double total;
+    private double frete;
+    private String status;
 
     private RelatorioService relatorioService = new RelatorioService();
+
+    //getters
+    public List<String> getProdutos() {
+        return produtos;
+    }
+
+    public List<Double> getPrecos() {
+        return precos;
+    }
+
+    public String getClienteNome() {
+        return clienteNome;
+    }
+
+    public List<Integer> getQuantidades() {
+        return quantidades;
+    }
+
+    public String getClienteEmail() {
+        return clienteEmail;
+    }
+
+    public String getClienteEndereco() {
+        return clienteEndereco;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public double getFrete() {
+        return frete;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    //setters
+    public void setClienteNome(String clienteNome) {
+        this.clienteNome = clienteNome;
+    }
+
+    public void setClienteEmail(String clienteEmail) {
+        this.clienteEmail = clienteEmail;
+    }
+
+    public void setClienteEndereco(String clienteEndereco) {
+        this.clienteEndereco = clienteEndereco;
+    }
 
     public void adicionarItem(String nome, double preco, int qtd) {
         produtos.add(nome);
