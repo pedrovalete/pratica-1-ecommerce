@@ -1,3 +1,8 @@
+package dominio;
+
+import infra.BancoDeDados;
+import servico.RelatorioService;
+
 import java.util.*;
 
 public class Pedido {
@@ -75,7 +80,7 @@ public class Pedido {
 
     public void salvarNoBanco() {
         BancoDeDados.salvarPedido(this);
-        BancoDeDados.salvarLog("Pedido salvo: " + clienteNome);
+        BancoDeDados.salvarLog("dominio.Pedido salvo: " + clienteNome);
     }
 
     public void finalizar() {

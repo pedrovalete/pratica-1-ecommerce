@@ -1,3 +1,7 @@
+package infra;
+
+import dominio.Pedido;
+
 public class BancoDeDados {
 
     public static void salvarPedido(Pedido p) {

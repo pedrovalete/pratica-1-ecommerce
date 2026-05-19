@@ -1,3 +1,7 @@
+package servico;
+
+import dominio.Pedido;
+
 public class RelatorioService {
 
     public void gerar(Pedido p) {

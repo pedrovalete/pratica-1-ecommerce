@@ -1,3 +1,7 @@
+import dominio.Pedido;
+import infra.BancoDeDados;
+import servico.RelatorioService;
+
 public class Sistema {
 
     public static void main(String[] args) {
