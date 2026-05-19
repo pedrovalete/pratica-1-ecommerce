@@ -1,6 +1,8 @@
 package dominio;
 
 import infra.BancoDeDados;
+import servico.CalculadoraDesconto;
+import servico.CalculadoraFrete;
 import servico.RelatorioService;
 
 import java.util.*;
@@ -46,21 +48,6 @@ public class Pedido {
         }
     }
 
-        public void calcularFrete () {
-            if (cliente.getEndereco().contains("SC")) {
-                frete = total * 0.05;
-            } else {
-                frete = total * 0.15;
-            }
-        }
-
-        public void aplicarDesconto () {
-            if (total > 500) {
-                total *= 0.85;
-            } else if (total > 200) {
-                total *= 0.9;
-            }
-        }
 
         public void atualizarEstoque () {
             for (ItemPedido item : itens) {
@@ -97,8 +84,8 @@ public class Pedido {
 
         public void finalizar () {
             calcularTotal();
-            aplicarDesconto();
-            calcularFrete();
+            total = new CalculadoraDesconto().aplicar(total);
+            frete = new CalculadoraFrete().calcular(this, total);
             atualizarEstoque();
             processarPagamento("cartao");
             enviarNotificacao();
