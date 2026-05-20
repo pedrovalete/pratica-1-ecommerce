@@ -15,7 +15,7 @@ public class Sistema {
 
         p.finalizar();
 
-        BancoDeDados.salvarLog("Sistema finalizado");
+        new Logger().registrar("Sistema finalizado");
 
         RelatorioService r = new RelatorioService();
         r.gerar(p);

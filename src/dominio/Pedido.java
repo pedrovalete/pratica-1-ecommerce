@@ -55,8 +55,8 @@ public class Pedido {
         }
 
         public void salvarNoBanco () {
-            BancoDeDados.salvarPedido(this);
-            BancoDeDados.salvarLog("Pedido salvo: " + cliente.getNome());
+            BancoDeDados().salvar(this);
+            newLogger().registrar("Pedido salvo" + cliente.getNome());
         }
 
         public void finalizar () {
