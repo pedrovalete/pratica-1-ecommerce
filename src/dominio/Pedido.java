@@ -1,9 +1,7 @@
 package dominio;
 
 import infra.BancoDeDados;
-import servico.CalculadoraDesconto;
-import servico.CalculadoraFrete;
-import servico.RelatorioService;
+import servico.*;
 
 import java.util.*;
 
@@ -48,27 +46,6 @@ public class Pedido {
         }
     }
 
-
-        public void atualizarEstoque () {
-            for (ItemPedido item : itens) {
-                System.out.println("Atualizando estoque de: " + item.getNomeProduto());
-            }
-        }
-
-        public void processarPagamento (String tipo){
-            if (tipo.equals("cartao")) {
-                System.out.println("Pagamento cartão OK");
-            } else if (tipo.equals("boleto")) {
-                System.out.println("Boleto gerado");
-            } else if (tipo.equals("pix")) {
-                System.out.println("PIX enviado");
-            }
-        }
-
-        public void enviarNotificacao () {
-            System.out.println("Email enviado para " + cliente.getEmail());
-        }
-
         public void gerarRelatorio () {
             System.out.println("Relatorio do pedido:");
             for (ItemPedido item : itens) {
@@ -86,9 +63,9 @@ public class Pedido {
             calcularTotal();
             total = new CalculadoraDesconto().aplicar(total);
             frete = new CalculadoraFrete().calcular(this, total);
-            atualizarEstoque();
-            processarPagamento("cartao");
-            enviarNotificacao();
+            new EstoqueService().atualizar(itens);
+            new ProcessadorPagamentoCartao().processar(this);
+            new NotificadorEmail().notificar(cliente);
             gerarRelatorio();
             salvarNoBanco();
             status = "FINALIZADO";
