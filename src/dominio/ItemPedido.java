@@ -16,7 +16,13 @@ public class ItemPedido {
         return preco * quantidade;
     }
 
-    public String getNomeProduto() { return nomeProduto; }
-    public double getPreco()       { return preco; }
-    public int getQuantidade()     { return quantidade; }
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+    public double getPreco() {
+        return preco;
+    }
+    public int getQuantidade() {
+        return quantidade;
+    }
 }

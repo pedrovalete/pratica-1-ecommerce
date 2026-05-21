@@ -12,7 +12,13 @@ public class Cliente {
         this.endereco = endereco;
     }
 
-    public String getNome()     { return nome; }
-    public String getEmail()    { return email; }
-    public String getEndereco() { return endereco; }
+    public String getNome() {
+        return nome;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getEndereco() {
+        return endereco;
+    }
 }

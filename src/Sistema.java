@@ -1,6 +1,7 @@
 import dominio.*;
 import infra.*;
 import servico.*;
+import aplicacao.ProcessadorPedido;
 
 public class Sistema {
 
@@ -11,12 +12,23 @@ public class Sistema {
         p.adicionarItem(new ItemPedido("Notebook", 3000, 1));
         p.adicionarItem(new ItemPedido("Mouse", 100, 2));
 
-        p.finalizar();
+        Logger logger = new Logger();
+        RelatorioService relatorio = new RelatorioService();
 
-        new Logger().registrar("Sistema finalizado");
+        ProcessadorPedido processador = new ProcessadorPedido(
+                new CalculadoraDesconto(),
+                new CalculadoraFrete(),
+                new EstoqueService(),
+                new ProcessadorPagamentoCartao(),
+                new NotificadorEmail(),
+                relatorio,
+                new BancoDeDados(),
+                logger
+        );
 
-        RelatorioService r = new RelatorioService();
-        r.gerarDetalhado(p);
+        processador.finalizar(p);
+        logger.registrar("Sistema finalizado");
+        relatorio.gerarDetalhado(p);
 
         System.out.println("Frete: " + p.getFrete());
         System.out.println("Status: " + p.getStatus());

@@ -1,7 +1,5 @@
 package dominio;
 
-import infra.Logger;
-import infra.BancoDeDados;
 import servico.*;
 
 import java.util.*;
@@ -34,34 +32,6 @@ public class Pedido {
         return status;
     }
 
-    public void adicionarItem(ItemPedido item) {
-        itens.add(item);
-    }
-
-    public void calcularTotal() {
-        total = 0;
-        for (ItemPedido item : itens) {
-            total += item.getSubtotal();
-        }
-    }
-
-        public void salvarNoBanco () {
-            new BancoDeDados().salvar(this);
-            new Logger().registrar("Pedido salvo" + cliente.getNome());
-        }
-
-        public void finalizar () {
-            calcularTotal();
-            total = new CalculadoraDesconto().aplicar(total);
-            frete = new CalculadoraFrete().calcular(this, total);
-            new EstoqueService().atualizar(itens);
-            new ProcessadorPagamentoCartao().processar(this);
-            new NotificadorEmail().notificar(cliente);
-            new RelatorioService().gerarResumo(this);
-            salvarNoBanco();
-            status = "FINALIZADO";
-        }
-
     public Cliente getCliente(){
         return cliente;
     }
@@ -69,4 +39,28 @@ public class Pedido {
     public List<ItemPedido> getItens() {
         return Collections.unmodifiableList(itens);
     }
+
+    public void adicionarItem(ItemPedido item) {
+        itens.add(item);
     }
+
+    public double calcularSubtotal() {
+        double subtotal = 0;
+        for (ItemPedido item : itens) {
+            subtotal += item.getSubtotal();
+        }
+        return subtotal;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public void setFrete(double frete) {
+        this.frete = frete;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}
