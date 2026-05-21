@@ -1,5 +1,6 @@
 package dominio;
 
+import infra.Logger;
 import infra.BancoDeDados;
 import servico.*;
 
@@ -19,8 +20,6 @@ public class Pedido {
         this.cliente = cliente;
         this.itens = new ArrayList<>();
     }
-
-    private RelatorioService relatorioService = new RelatorioService();
 
     //getters
     public double getTotal() {
@@ -46,17 +45,9 @@ public class Pedido {
         }
     }
 
-        public void gerarRelatorio () {
-            System.out.println("Relatorio do pedido:");
-            for (ItemPedido item : itens) {
-                System.out.println(item.getNomeProduto());
-            }
-            System.out.println("Total: " + total);
-        }
-
         public void salvarNoBanco () {
-            BancoDeDados().salvar(this);
-            newLogger().registrar("Pedido salvo" + cliente.getNome());
+            new BancoDeDados().salvar(this);
+            new Logger().registrar("Pedido salvo" + cliente.getNome());
         }
 
         public void finalizar () {
@@ -66,7 +57,7 @@ public class Pedido {
             new EstoqueService().atualizar(itens);
             new ProcessadorPagamentoCartao().processar(this);
             new NotificadorEmail().notificar(cliente);
-            gerarRelatorio();
+            new RelatorioService().gerarResumo(this);
             salvarNoBanco();
             status = "FINALIZADO";
         }

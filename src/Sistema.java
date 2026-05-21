@@ -1,8 +1,6 @@
-import dominio.Pedido;
-import infra.BancoDeDados;
-import servico.RelatorioService;
-import dominio.Cliente;
-import dominio.ItemPedido;
+import dominio.*;
+import infra.*;
+import servico.*;
 
 public class Sistema {
 
@@ -18,7 +16,7 @@ public class Sistema {
         new Logger().registrar("Sistema finalizado");
 
         RelatorioService r = new RelatorioService();
-        r.gerar(p);
+        r.gerarDetalhado(p);
 
         System.out.println("Frete: " + p.getFrete());
         System.out.println("Status: " + p.getStatus());
